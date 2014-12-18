@@ -1,0 +1,21 @@
+{
+  "name": "better-view",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.bundle.js",
+  "dependencies": {
+    "ampersand-virtual-dom-mixin": "^0.1.2",
+    "browserify": "^7.0.1",
+    "jade": "^1.8.1",
+    "jadeify": "^3.1.0",
+    "virtual-dom-stringify": "^1.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "build": "browserify -t jadeify -s app app.js > app.bundle.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
