@@ -57,12 +57,14 @@ function createFromElement(el, key, options) {
   }
 
   var widget;
-  if (properties.dataset.vdomWidget && options.hydrateWidget) {
-      widget = options.hydrateWidget(el, properties);
-      if (widget) { console.log('Constructed widget', widget); }
+  var node = new VNode(tagName.toLowerCase(), properties, children, null, namespace);
+
+  if (options.isWidget && options.isWidget(properties)) {
+      widget = options.hydrateWidget(el, node, properties);
+      return widget;
   }
 
-  return widget || new VNode(tagName.toLowerCase(), properties, children, null, namespace);
+  return node;
 }
 
 
@@ -71,6 +73,7 @@ function getElementProperties(el) {
 
   props.forEach(function(propName) {
     if(propName === 'contentEditable') return;
+    if(propName === 'value') return;
     if(!el[propName]) return;
 
     // Special case: style
@@ -108,12 +111,12 @@ function getElementProperties(el) {
       obj[propName] = data
       return
     }
-    
+
     // Special case: attributes
     // some properties are only accessible via .attributes, so 
     // that's what we'd do, if vdom-create-element could handle this.
     if("attributes" == propName) return
-    
+
 
     // default: just copy the property
     obj[propName] = el[propName]

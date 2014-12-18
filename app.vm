@@ -1,0 +1,7 @@
+document = require('min-document');
+var toString = require('virtual-dom-stringify');
+var MyView = require('./app');
+
+var view = new MyView();
+view.render();
+html = toString(view.tree, null, { invalidAttributes: true });
