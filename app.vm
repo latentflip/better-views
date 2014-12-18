@@ -5,3 +5,5 @@ var MyView = require('./app');
 var view = new MyView();
 view.render();
 html = toString(view.tree, null, { invalidAttributes: true });
+console.log('hello from the renderer');
+done(html);

@@ -26,6 +26,7 @@ var MyView = View.extend(vdom, {
         this.on('change:i', this.render.bind(this));
         setTimeout(function () {
             var i = setInterval(function () {
+                console.log('i');
                 this.i++;
             }.bind(this), 1000);
         }.bind(this), 2000);

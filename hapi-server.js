@@ -15,14 +15,17 @@ server.route({
     handler: function (request, reply) {
         var ctx = {
             require: require,
-            html: ''
+            console: console,
+            done: function (html) {
+                reply('<div id=app>' + html + '</div><script src="boot-app.js"></script>');
+            }
         };
+
         try {
             script.runInNewContext(ctx);
         } catch (e) {
             console.log(e);
         }
-        reply('<div id=app>' + ctx.html + '</div><script src="boot-app.js"></script>');
     }
 });
 
